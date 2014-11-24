@@ -14,10 +14,11 @@ receta.config(['$routeProvider',
   )
 ])
 
+
+
 controllers = angular.module('controllers',[])
-controllers.controller("RecipesController", [ '$scope', '$routeParams',
-'$location', '$resource',
-  ($scope, $routeParams, $location,$resource)->
+controllers.controller("RecipesController", [ '$scope', '$routeParams', '$location', '$resource',
+  ($scope,$routeParams,$location,$resource)->
     $scope.keywords = $routeParams.keywords
     $scope.search = (keywords)->  $location.path("/").search('keywords',keywords)
 

@@ -1,9 +1,9 @@
 describe "RecipesController", ->
-  scope        = null
-  ctrl         = null
-  location     = null
-  routeParams  = null
-  resource     = null
+  scope = null
+  ctrl = null
+  location = null
+  routeParams = null
+  resource = null
 
   setupController =(keywords)->
     inject(($location, $routeParams, $rootScope, $resource, $controller)->
@@ -18,8 +18,8 @@ describe "RecipesController", ->
                                 $location: location)
     )
 
-    beforeEach(module("receta"))
-    beforeEach(setupController())
+  beforeEach(module("receta"))
+  beforeEach(setupController())
 
-    it 'defaults to no recipes', ->
-      expect(scope.recipes).toEqualData([])
+  it 'defaults to no recipes', ->
+    expect(scope.recipes).toEqualData([])
