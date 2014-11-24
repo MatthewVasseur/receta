@@ -18,7 +18,6 @@ controllers = angular.module('controllers',[])
 
 receta.run(console.log('Angular UP!'););
 
-
 recipes = [
   {
     id: 1
