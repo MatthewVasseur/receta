@@ -43,6 +43,5 @@ describe RecipesController do
         expect(results.size).to eq(0)
       end
     end
-
   end
 end
