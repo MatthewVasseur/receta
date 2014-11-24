@@ -40,7 +40,6 @@ group :test, :development do
   gem "capybara"
   gem "database_cleaner"
   gem "selenium-webdriver"
-  gem "chromedriver-helper"
 end
 
 # bundle exec rake doc:rails generates the API under doc/api.
