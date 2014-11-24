@@ -1,12 +1,52 @@
 require 'spec_helper'
 
 describe RecipesController do
-
+  render_views
   describe "GET 'index'" do
+    before do
+      Recipe.create!(name: 'Baked Potato w/ Cheese')
+      Recipe.create!(name: 'Garlic Mashed Potatos')
+      Recipe.create!(name: 'Potatos Au Gratin')
+      Recipe.create!(name: 'Baked Brussel Sprouts')
+
+      xhr :get, :index, format: :json, keywords: keywords
+    end
+
+    subject(:results) { JSON.parse(response.body) }
+
+    def extract_name
+      ->(object){ object["name"] }
+    end
+
+    context "when the search finds results" do
+      let(:keywords) { 'baked' }
+      it 'should 200' do
+        expect(response.status).to eq(200)
+      end
+      it 'should return two results' do
+        expect(response.size).to eq(2)
+      end
+      it "should include 'Baked Potato w/ Cheese'" do
+        expect(results.map(&extract_name)).to include('Baked Potato w/ Cheese')
+      end
+      it "should include 'Baked Brussel Sprouts'" do
+        expect(results.map(&extract_name)).to include('Baked Brussel Sprouts')
+      end
+    end
+
+    context "when the search doesn't find results" do
+      let(:keywords) { 'baked' }
+      it 'should 200' do
+        expect(response.status).to eq(200)
+      end
+      it 'should return no results' do
+        expect(response.size).to eq(2)
+      end
+    end
+
     it "returns http success" do
       get 'index'
       response.should be_success
     end
   end
-
 end
