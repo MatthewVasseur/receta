@@ -36,6 +36,9 @@ describe RecipesController do
 
     context "when the search doesn't find results" do
       let(:keywords) { 'foo' }
+      it 'should 200' do
+        expect(response.status).to eq(200)
+      end
       it 'should return no results' do
         expect(results.size).to eq(0)
       end
