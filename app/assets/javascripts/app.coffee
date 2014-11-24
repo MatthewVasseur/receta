@@ -1,10 +1,11 @@
-goose = angular.module('goose',[
+receta = angular.module('receta',[
   'templates',
   'ngRoute',
+  'ngResource',
   'controllers'
 ])
 
-goose.config(['$routeProvider',
+receta.config(['$routeProvider',
   ($routeProvider)->
     $routeProvider
       .when('/',
@@ -14,8 +15,9 @@ goose.config(['$routeProvider',
 ])
 
 controllers = angular.module('controllers',[])
-controllers.controller("RecipesController", [ '$scope', '$routeParams', '$location',
-  ($scope, $routeParams, $location)->
+controllers.controller("RecipesController", [ '$scope', '$routeParams',
+'$location', '$resource',
+  ($scope, $routeParams, $location,$resource)->
     $scope.keywords = $routeParams.keywords
     $scope.search = (keywords)->  $location.path("/").search('keywords',keywords)
 
@@ -26,7 +28,7 @@ controllers.controller("RecipesController", [ '$scope', '$routeParams', '$locati
       $scope.recipes = []
 ])
 
-goose.run(console.log('Angular UP!'););
+receta.run(console.log('Angular UP!'););
 
 
 recipes = [
