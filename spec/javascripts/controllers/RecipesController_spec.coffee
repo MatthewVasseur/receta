@@ -5,17 +5,17 @@ describe "RecipesController", ->
   routeParams = null
   resource = null
 
-  setupController =(keywords)->
+  setupController = (keywords) ->
     inject(($location, $routeParams, $rootScope, $resource, $controller)->
-      scope       = $rootScope.$new()
-      location    = $location
-      resource    = $resource
+      scope = $rootScope.$new()
+      location = $location
+      resource = $resource
       routeParams = $routeParams
       routeParams.keywords = keywords
 
-      ctrl        = $controller('RecipesController',
-                                $scope: scope
-                                $location: location)
+      ctrl = $controller('RecipesController',
+        $scope: scope
+        $location: location)
     )
 
   beforeEach(module("receta"))
