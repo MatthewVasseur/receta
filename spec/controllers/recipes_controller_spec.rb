@@ -5,8 +5,8 @@ describe RecipesController do
   describe "GET 'index'" do
     before do
       Recipe.create!(name: 'Baked Potato w/ Cheese')
-      Recipe.create!(name: 'Garlic Mashed Potatos')
-      Recipe.create!(name: 'Potatos Au Gratin')
+      Recipe.create!(name: 'Garlic Mashed Potatoes')
+      Recipe.create!(name: 'Potatoes Au Gratin')
       Recipe.create!(name: 'Baked Brussel Sprouts')
 
       xhr :get, :index, format: :json, keywords: keywords
@@ -15,7 +15,7 @@ describe RecipesController do
     subject(:results) { JSON.parse(response.body) }
 
     def extract_name
-      ->(object){ object["name"] }
+      ->(object) { object["name"] }
     end
 
     context "when the search finds results" do
@@ -24,7 +24,7 @@ describe RecipesController do
         expect(response.status).to eq(200)
       end
       it 'should return two results' do
-        expect(response.size).to eq(2)
+        expect(results.size).to eq(2)
       end
       it "should include 'Baked Potato w/ Cheese'" do
         expect(results.map(&extract_name)).to include('Baked Potato w/ Cheese')
@@ -35,18 +35,11 @@ describe RecipesController do
     end
 
     context "when the search doesn't find results" do
-      let(:keywords) { 'baked' }
-      it 'should 200' do
-        expect(response.status).to eq(200)
-      end
+      let(:keywords) { 'foo' }
       it 'should return no results' do
-        expect(response.size).to eq(2)
+        expect(results.size).to eq(0)
       end
     end
 
-    it "returns http success" do
-      get 'index'
-      response.should be_success
-    end
   end
 end
